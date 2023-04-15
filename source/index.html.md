@@ -3,13 +3,13 @@ title: API Reference
 
 language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
   - shell
-  - ruby
   - python
   - javascript
+  - php
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <a href='https://warp-driven.com/'>Documentation Powered by Warp Driven</a>
+  - <a href='https://warp-driven.com/'>Abourt Us</a>
 
 includes:
   - errors
@@ -25,104 +25,49 @@ meta:
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the [Warp Driven](https://warp-driven.com/) API Document! You can use our API to access Warp Driven API endpoints, which can integrate Warp Driven services to sysytems of clients.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+Our API provides a way for E-commerce websites to interact with our recommendation system and AI capabilities, in order to enhance their customers' online-shopping experience.
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Our API is designed to be flexible and scalable, allowing e-commerce clients to easily integrate our services into their existing systems. With our API, clients can access our powerful AI technology, which is able to analyze customer behavior and provide personalized recommendations, resulting in increased sales and customer satisfaction.
 
-# Authentication
+This document will provide a comprehensive guide to our API, including instructions on how to access and use our various endpoints. We will also provide information on the parameters required for each endpoint, as well as example requests and responses.
 
-> To authorize, use this code:
+Whether you are a developer looking to integrate our services into your e-commerce website, or a business owner looking to improve your online shopping experience, our API documentation will provide you with all the information you need to get started.
 
-```ruby
-require 'kittn'
+You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+# Example
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+## Delete API example
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
+curl "http://example.com/api/kittens/2" \
+  -X DELETE \
   -H "Authorization: meowmeowmeow"
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
 ```python
-import kittn
+import os
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
+print(f"This is an example")
 ```
 
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> JSON response example:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+  "id": 000,
+  "deleted" : ":("
+}
 ```
 
-This endpoint retrieves all kittens.
+> Make sure to use Warp Driven assigned `X-API-KEY`.
+
+This is an example API for document.
+For **Authorization** in API header, please add the ==X-API-KEY== API key, which is assigned by Warp Driven.
+
+`X-API-KEY: abcabc`
 
 ### HTTP Request
 
@@ -132,114 +77,21 @@ This endpoint retrieves all kittens.
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+test_param_1 | false | Test is test.
+test_param_2 | true | Test is test 2.
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+You must replace <code>abcabc</code> with your personal API key.
 </aside>
 
-## Get a Specific Kitten
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
 
-```ruby
-require 'kittn'
+<aside class="warning">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+# Nuwa
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+# Visually Similar Search
