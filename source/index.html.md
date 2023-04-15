@@ -1,176 +1,245 @@
-# Warp Driven Nuwa (女娲) Platform API
-Welcome to Warp Driven Nuwa Platform API docs
+---
+title: API Reference
 
-## Version: 1.0
+language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
+  - shell
+  - ruby
+  - python
+  - javascript
 
-### /product/upsert
+toc_footers:
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
-#### POST
-##### Summary
+includes:
+  - errors
 
-Upsert
+search: true
 
-##### Description
+code_clipboard: true
 
-Init VS products with item JSON format input\\n\\nArgs:\\n\\n    items_info: product_ids, is_convert_webp, is_remove_background, data_checkpoints\\n\\n    website_info: input api_key top get website info\\n\\nReturns:\\n\\n    success_response_handler or error_response_handler
+meta:
+  - name: description
+    content: Documentation for the Kittn API
+---
 
-##### Responses
+# Introduction
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Successful Response |
-| 422 | Validation Error |
+Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
 
-##### Security
+We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-| Security Schema | Scopes |
-| --------------- | ------ |
-| APIKeyHeader |  |
+This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
-### /product/update
+# Authentication
 
-#### POST
-##### Summary
+> To authorize, use this code:
 
-Update
+```ruby
+require 'kittn'
 
-##### Responses
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+```
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Successful Response |
-| 422 | Validation Error |
+```python
+import kittn
 
-##### Security
+api = kittn.authorize('meowmeowmeow')
+```
 
-| Security Schema | Scopes |
-| --------------- | ------ |
-| APIKeyHeader |  |
+```shell
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here" \
+  -H "Authorization: meowmeowmeow"
+```
 
-### /product/delete
+```javascript
+const kittn = require('kittn');
 
-#### DELETE
-##### Summary
+let api = kittn.authorize('meowmeowmeow');
+```
 
-Delete
+> Make sure to replace `meowmeowmeow` with your API key.
 
-##### Responses
+Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Successful Response |
-| 422 | Validation Error |
+Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-##### Security
+`Authorization: meowmeowmeow`
 
-| Security Schema | Scopes |
-| --------------- | ------ |
-| APIKeyHeader |  |
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
 
-### /product/get_vs_credit_status
+# Kittens
 
-#### GET
-##### Summary
+## Get All Kittens
 
-Get Vs Credit Status
+```ruby
+require 'kittn'
 
-##### Description
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get
+```
 
-Get VS init process status\\n\\nReturns:\\n\\n    {\\n\\n        \\"status\\": True,\\n\\n        \\"msg\\": msg,\\n\\n        \\"data\\": {\\n\\n            'task_id': <task_id>,\\n\\n            'task_status': 'RUNNING,\\n\\n            'task_progress': 60,\\n\\n            'is_expired': false,\\n\\n            'plan_end_time': '2023-10-24',\\n\\n            'image_vector_left': 10,\\n\\n            'webp_left': 100,\\n\\n            'bk_rm_left': 100\\n\\n        }\\n\\n    }
+```python
+import kittn
 
-##### Parameters
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get()
+```
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ------ |
-| plan_id | query |  | Yes | integer |
+```shell
+curl "http://example.com/api/kittens" \
+  -H "Authorization: meowmeowmeow"
+```
 
-##### Responses
+```javascript
+const kittn = require('kittn');
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Successful Response |
-| 422 | Validation Error |
+let api = kittn.authorize('meowmeowmeow');
+let kittens = api.kittens.get();
+```
 
-##### Security
+> The above command returns JSON structured like this:
 
-| Security Schema | Scopes |
-| --------------- | ------ |
-| APIKeyHeader |  |
+```json
+[
+  {
+    "id": 1,
+    "name": "Fluffums",
+    "breed": "calico",
+    "fluffiness": 6,
+    "cuteness": 7
+  },
+  {
+    "id": 2,
+    "name": "Max",
+    "breed": "unknown",
+    "fluffiness": 5,
+    "cuteness": 10
+  }
+]
+```
 
-### /product/init_bigdata/
+This endpoint retrieves all kittens.
 
-#### POST
-##### Summary
+### HTTP Request
 
-Init Products Bigdata
+`GET http://example.com/api/kittens`
 
-##### Description
+### Query Parameters
 
-Init VS products with product IDs for big data items init\\n\\nArgs:\\n\\n    items_info: product_ids, is_convert_webp, is_remove_background, data_checkpoints\\n\\n    website_info: input api_key top get website info\\n\\nReturns:\\n\\n    success_response_handler
+Parameter | Default | Description
+--------- | ------- | -----------
+include_cats | false | If set to true, the result will also include cats.
+available | true | If set to false, the result will include kittens that have already been adopted.
 
-##### Responses
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Successful Response |
-| 422 | Validation Error |
+## Get a Specific Kitten
 
-##### Security
+```ruby
+require 'kittn'
 
-| Security Schema | Scopes |
-| --------------- | ------ |
-| APIKeyHeader |  |
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get(2)
+```
 
-### /product/reload
+```python
+import kittn
 
-#### POST
-##### Summary
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get(2)
+```
 
-Reload Data
+```shell
+curl "http://example.com/api/kittens/2" \
+  -H "Authorization: meowmeowmeow"
+```
 
-##### Description
+```javascript
+const kittn = require('kittn');
 
-Reload data into ElasticSearch for dev using
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.get(2);
+```
 
-##### Responses
+> The above command returns JSON structured like this:
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Successful Response |
+```json
+{
+  "id": 2,
+  "name": "Max",
+  "breed": "unknown",
+  "fluffiness": 5,
+  "cuteness": 10
+}
+```
 
-##### Security
+This endpoint retrieves a specific kitten.
 
-| Security Schema | Scopes |
-| --------------- | ------ |
-| APIKeyHeader |  |
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 
-### /product/handle_history
+### HTTP Request
 
-#### GET
-##### Summary
+`GET http://example.com/kittens/<ID>`
 
-Show Products Handle History
+### URL Parameters
 
-##### Description
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to retrieve
 
-Get website products image handle history list
+## Delete a Specific Kitten
 
-##### Parameters
+```ruby
+require 'kittn'
 
-| Name | Located in | Description | Required | Schema |
-| ---- | ---------- | ----------- | -------- | ------ |
-| page_no | query |  | No | integer |
-| page_size | query |  | No | integer |
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.delete(2)
+```
 
-##### Responses
+```python
+import kittn
 
-| Code | Description |
-| ---- | ----------- |
-| 200 | Successful Response |
-| 422 | Validation Error |
+api = kittn.authorize('meowmeowmeow')
+api.kittens.delete(2)
+```
 
-##### Security
+```shell
+curl "http://example.com/api/kittens/2" \
+  -X DELETE \
+  -H "Authorization: meowmeowmeow"
+```
 
-| Security Schema | Scopes |
-| --------------- | ------ |
-| APIKeyHeader |  |
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.delete(2);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "deleted" : ":("
+}
+```
+
+This endpoint deletes a specific kitten.
+
+### HTTP Request
+
+`DELETE http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to delete
+
