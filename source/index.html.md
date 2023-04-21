@@ -94,4 +94,334 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 # Nuwa
 
+## Product Property
+
+Our API allows you to manage the product. We define a standard product object, which includes crucial and basic properties to describe the product.
+
+> Example of a product object:
+
+```json
+{
+    "shop_variant_id": "001",
+    "shop_product_id": "shop_product_id-001",
+    "sku": "sku-001",
+    "product_id": "product_id-001",
+    "barcode": "my-barcode",
+    "is_default_variant": true,
+    "title": "my-title",
+    "stock_quantity": 100,
+    "stock_status": 1,
+    "description": "Description text is here",
+    "categories": [
+        {
+            "cat_id": 1,
+            "cat_name": "Clothing"
+        }
+    ],
+    "brand": "my-brand",
+    "main_image_url": "https://test/image/link",
+    "image_urls": [
+        "www.image1.com",
+        "www.image2.com"
+    ],
+    "product_link": "https://example.com/product/link/",
+    "type": "variable",
+    "status": 1,
+    "regular_price": 100.00,
+    "price": 99.00,
+    "sale_price": 50.00,
+    "cost_price": 0,
+    "weight": 118.5,
+    "colour": "green",
+    "size": "large",
+    "on_sale": false,
+    "purchasable": false,
+    "related_ids": [
+        31
+    ],
+    "meta_fields": [
+        {
+            "key": "country",
+            "value": "AUS",
+            "type": ""
+        }
+    ],
+    "date_created_gmt": "2017-03-23T20:03:12",
+    "date_modified_gmt": "2017-03-23T20:03:12"
+}
+```
+
+### Product Property Description
+
+Attribute | Data Type | Nullable | Description
+--------- | --------- | -------- |  -----------
+shop_variant_id | String | **No** | The unique id for product
+shop_product_id | String | **No** | 
+sku             | String | Yes | 
+product_id | String | Yes | 
+barcode | String | Yes | 
+is_default_variant | Bool | Yes | 
+title | String | **No** | 
+stock_quantity | String | Yes | 
+stock_status | Integer | Yes | 
+description | String | Yes | 
+short_description | String | Yes | 
+categories | Category List | Yes | 
+brand | String | Yes | 
+main_image_url | String | Yes | 
+image_urls | String List | Yes | 
+product_link | String | Yes | 
+type | String | Yes | 
+status | Interger | Yes | 
+regular_price | Float | Yes | 
+price | Float | Yes | 
+sale_price | Float | Yes | 
+cost_price | Float | Yes | 
+price_currency | String | Yes | 
+on_sale | Bool | Yes | 
+purchasable | Bool | Yes | 
+related_ids | Interger List | Yes | 
+weight | Float | Yes | 
+colour | String | Yes | 
+size | String | Yes |
+meta_fields | Metadata List | Yes | 
+date_created_gmt | Date | Yes |  
+date_modified_gmt | Date | Yes |   
+
+<aside class="success">
+Remember — To have a successful response, you cannot add the attibute which is not included in the above table.
+</aside>
+
+### Category Description
+
+### Metadata Description
+
+## Insert Products
+
+> Example of how to insert new products:
+
+```shell
+curl --location 'https://example.com/product/upsert/' \
+--header 'Content-Type: application/json' \
+--header 'X-API-Key: meowmeowmeow' \
+--data '{
+    "items": [
+        {
+            "shop_variant_id": "001",
+            "shop_product_id": "shop_product_id-001",
+            "sku": "sku-001",
+            "product_id": "product_id-001",
+            "barcode": "my-barcode",
+            "is_default_variant": true,
+            "title": "my-title",
+            "stock_quantity": 100,
+            "stock_status": 1,
+            "description": "Description text is here",
+            "categories": [
+                {
+                    "cat_id": 1,
+                    "cat_name": "Clothing"
+                }
+            ],
+            "brand": "my-brand",
+            "main_image_url": "https://test/image/link",
+            "image_urls": [
+                "www.image1.com",
+                "www.image2.com"
+            ],
+            "product_link": "https://example.com/product/link/",
+            "type": "variable",
+            "status": 1,
+            "regular_price": 100.00,
+            "price": 99.00,
+            "sale_price": 50.00,
+            "cost_price": 0,
+            "weight": 118.5,
+            "colour": "green",
+            "size": "large",
+            "on_sale": false,
+            "purchasable": false,
+            "related_ids": [
+                31
+            ],
+            "meta_fields": [
+                {
+                    "key": "country",
+                    "value": "AUS",
+                    "type": ""
+                }
+            ],
+            "date_created_gmt": "2017-03-23T20:03:12",
+            "date_modified_gmt": "2017-03-23T20:03:12"
+        }
+    ]
+}'
+```
+
+```python
+import requests
+import json
+
+url = "https://example.com/product/upsert/"
+
+payload = json.dumps({
+  "items": [
+    {
+          "shop_variant_id": "001",
+          "shop_product_id": "shop_product_id-001",
+          "sku": "sku-001",
+          "product_id": "product_id-001",
+          "barcode": "my-barcode",
+          "is_default_variant": true,
+          "title": "my-title",
+          "stock_quantity": 100,
+          "stock_status": 1,
+          "description": "Description text is here",
+          "categories": [
+              {
+                  "cat_id": 1,
+                  "cat_name": "Clothing"
+              }
+          ],
+          "brand": "my-brand",
+          "main_image_url": "https://test/image/link",
+          "image_urls": [
+              "www.image1.com",
+              "www.image2.com"
+          ],
+          "product_link": "https://example.com/product/link/",
+          "type": "variable",
+          "status": 1,
+          "regular_price": 100.00,
+          "price": 99.00,
+          "sale_price": 50.00,
+          "cost_price": 0,
+          "weight": 118.5,
+          "colour": "green",
+          "size": "large",
+          "on_sale": false,
+          "purchasable": false,
+          "related_ids": [
+              31
+          ],
+          "meta_fields": [
+              {
+                  "key": "country",
+                  "value": "AUS",
+                  "type": ""
+              }
+          ],
+          "date_created_gmt": "2017-03-23T20:03:12",
+          "date_modified_gmt": "2017-03-23T20:03:12"
+      }
+  ]
+})
+
+headers = {
+  'Content-Type': 'application/json',
+  'X-API-Key': 'meowmeowmeow'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+```
+
+```javascript
+const axios = require('axios');
+let data = JSON.stringify({
+  "items": [
+    {
+          "shop_variant_id": "001",
+          "shop_product_id": "shop_product_id-001",
+          "sku": "sku-001",
+          "product_id": "product_id-001",
+          "barcode": "my-barcode",
+          "is_default_variant": true,
+          "title": "my-title",
+          "stock_quantity": 100,
+          "stock_status": 1,
+          "description": "Description text is here",
+          "categories": [
+              {
+                  "cat_id": 1,
+                  "cat_name": "Clothing"
+              }
+          ],
+          "brand": "my-brand",
+          "main_image_url": "https://test/image/link",
+          "image_urls": [
+              "www.image1.com",
+              "www.image2.com"
+          ],
+          "product_link": "https://example.com/product/link/",
+          "type": "variable",
+          "status": 1,
+          "regular_price": 100.00,
+          "price": 99.00,
+          "sale_price": 50.00,
+          "cost_price": 0,
+          "weight": 118.5,
+          "colour": "green",
+          "size": "large",
+          "on_sale": false,
+          "purchasable": false,
+          "related_ids": [
+              31
+          ],
+          "meta_fields": [
+              {
+                  "key": "country",
+                  "value": "AUS",
+                  "type": ""
+              }
+          ],
+          "date_created_gmt": "2017-03-23T20:03:12",
+          "date_modified_gmt": "2017-03-23T20:03:12"
+      }
+  ]
+});
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://example.com/product/upsert/',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'X-API-Key': 'meowmeowmeow'
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+```
+
+This API is used to save the raw data into Warp Driven's data center for initialising and standardising products, and those product data will be fed for further AI services, such as **Visual similar**, **NLP-based Recommendation**, etc.
+
+The product data should be attached to the POST Body part.
+
+`X-API-KEY: meowmeowmeow`
+
+### HTTP Request
+
+`POST /product/upsert/`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+items | [] | The array of products
+
+<aside class="notice">
+For **Authorization** in the API header, you must replace the **X-API-KEY** API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
+</aside>
+
+## Update Products
+
+## Delete Products
+
 # Visually Similar Search
