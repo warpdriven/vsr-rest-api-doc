@@ -94,7 +94,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 # Nuwa API
 
-## <a id="product_property">Product Property</a>
+## Product Property
 
 Our API allows you to manage the product. We define a standard product object, which includes crucial and basic properties to describe the product.
 
@@ -166,7 +166,7 @@ stock_quantity | String | Yes |
 stock_status | Integer | Yes | 
 description | String | Yes | 
 short_description | String | Yes | 
-categories | [Category](#category_descrption_section) List | Yes | 
+categories | [Category](#category-property) List | Yes | 
 brand | String | Yes | 
 main_image_url | String | Yes | 
 image_urls | String List | Yes | 
@@ -184,7 +184,7 @@ related_ids | Interger List | Yes |
 weight | Float | Yes | 
 colour | String | Yes | 
 size | String | Yes |
-meta_fields | [Metadata](#metadata_description_section) List | Yes | 
+meta_fields | [Metadata](#metadata-property) List | Yes | 
 date_created_gmt | Date | Yes |  
 date_modified_gmt | Date | Yes |   
 
@@ -192,7 +192,7 @@ date_modified_gmt | Date | Yes |
 Remember — To have a successful response, you cannot add the attibute which is not included in the above table.
 </aside>
 
-## <a id="category_descrption_section">Category Description</a>
+## Category Property
 
 The categories attribute consists of a list of category objects. You can add multiple category objects in the list to descript your product.
 
@@ -215,7 +215,7 @@ The categories attribute consists of a list of category objects. You can add mul
 Remember — To add a category object, you should only contain <code>cat_id</code> and <code>cat_name</code> in it.
 </aside>
 
-## <a id="metadata_description_section">Metadata Description</a>
+## Metadata Property
 
 The meta_fields attribute consists of a list of metadata object. You can add multiple metadata objects in the list to provide any kind of extra data for the product.
 
@@ -458,7 +458,7 @@ The product data should be attached to the POST Body part.
 
 Data | Description
 --------- | -----------
-items | The list of [product object](#product_property)
+items | The list of [product object](#product-property)
 
 <aside class="notice">
 For Authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
@@ -467,10 +467,10 @@ For Authorization in the API header, you must replace the dummy <code>X-API-KEY<
 ### Response
 
 <aside class="success">
-success
+Successful response
 </aside>
 
-I have description here
+> Successful response example: 
 
 ```json
 {
@@ -489,6 +489,10 @@ I have description here
     }
 }
 ```
+
+If you correctly add new products in the request body, and you have enabled the VS service, you should be able to receive the task id in the response, which can be used to furtherly query the VS job status.
+
+If you submit the same product, you will receive the response with nothing.
 
 ## Update Products
 
