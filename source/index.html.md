@@ -211,6 +211,13 @@ The categories attribute consists of a list of category objects. You can add mul
             ]
 ```
 
+### Category Property Description
+
+Attribute | Data Type | Nullable | Description
+--------- | --------- | -------- |  -----------
+cat_id | String | **No** | The id of category
+cat_name | String | **No** | The name of category
+
 <aside class="success">
 Remember — To add a category object, you should only contain <code>cat_id</code> and <code>cat_name</code> in it.
 </aside>
@@ -235,6 +242,14 @@ The meta_fields attribute consists of a list of metadata object. You can add mul
                 }
             ]
 ```
+
+### Category Property Description
+
+Attribute | Data Type | Nullable | Description
+--------- | --------- | -------- |  -----------
+key | String | **No** | The name of this metadata
+value | String | **No** | The name of this metadata
+type | String | **No** | It is flexible to fulfill any info
 
 <aside class="success">
 Remember — To add a metadata object, you should only contain <code>key</code>, <code>value</code> and <code>type</code> in it.
@@ -466,9 +481,68 @@ For Authorization in the API header, you must replace the dummy <code>X-API-KEY<
 
 ### Response
 
+> Successful response example: 
+
+```json
+{
+    "status": true,
+    "msg": "Started Warp Driven Visual Search products init successfully.",
+    "data": {
+        "task_id": "{task_id}"
+    }
+}
+```
+```json
+{
+    "status": true,
+    "msg": "There is no new product or updated product!",
+    "data": {
+        "task_id": null
+    }
+}
+```
+
+If you correctly add new products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.
+
+If you try to add the same products more than once, you will receive the response with nothing.
+
 <aside class="success">
-Successful response
+Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attibutes change.
 </aside>
+
+## Update Products
+
+> Example of how to update products:
+
+```shell
+```
+
+```python
+```
+
+```javascript
+```
+
+This is the place to decribe the API
+
+`X-API-KEY: meowmeowmeow`
+
+### HTTP Request
+
+`POST /product/update/`
+
+### Request Body
+
+Data | Description
+--------- | -----------
+update_items | The list of [product object](#product-property), but you can just list those changed attributes.
+
+<aside class="notice">
+First, the <code>shop_variant_id</code> is required!
+Second, for authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
+</aside>
+
+### Response
 
 > Successful response example: 
 
@@ -480,7 +554,8 @@ Successful response
         "task_id": "{task_id}"
     }
 }
-
+```
+```json
 {
     "status": true,
     "msg": "There is no new product or updated product!",
@@ -490,12 +565,104 @@ Successful response
 }
 ```
 
-If you correctly add new products in the request body, and you have enabled the VS service, you should be able to receive the task id in the response, which can be used to furtherly query the VS job status.
+If you correctly add updated products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.
 
-If you submit the same product, you will receive the response with nothing.
-
-## Update Products
+If you try to add the same products more than once, you will receive the response with nothing.
 
 ## Delete Products
+
+> Example of how to delete products:
+
+```shell
+curl --location --request DELETE 'https://example.com/product/delete/' \
+--header 'Content-Type: application/json' \
+--header 'X-API-Key: meowmeowmeow' \
+--data '{
+    "delete_shop_variant_ids": [
+        "001", "002"
+    ]
+}'
+```
+
+```python
+import requests
+import json
+
+url = "https://example.com/product/delete/"
+
+payload = json.dumps({
+  "delete_shop_variant_ids": [
+    "001",
+    "002"
+  ]
+})
+headers = {
+  'Content-Type': 'application/json',
+  'X-API-Key': 'meowmeowmeow'
+}
+
+response = requests.request("DELETE", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```javascript
+const axios = require('axios');
+let data = JSON.stringify({
+  "delete_shop_variant_ids": [
+    "001",
+    "002"
+  ]
+});
+
+let config = {
+  method: 'delete',
+  maxBodyLength: Infinity,
+  url: 'https://example.com/product/delete/',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'X-API-Key': 'meowmeowmeow'
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+```
+
+This is the used to delete products from our services. To delete the product, you have to provide shop_variant_id.
+
+`X-API-KEY: meowmeowmeow`
+
+### HTTP Request
+
+`POST /product/delete/`
+
+### Request Body
+
+Data | Description
+--------- | -----------
+delete_shop_variant_ids | The list of shop_variant_id 
+
+<aside class="notice">
+For authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
+</aside>
+
+### Response
+
+> Successful response example: 
+
+```json
+{
+    "status": true,
+    "msg": "{num_of_products} products have been successfully deleted!",
+    "data": null
+}
+```
 
 # Visually Similar Search API
