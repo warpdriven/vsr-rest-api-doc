@@ -557,7 +557,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 <tr>
 <td>categories</td>
-<td>Category List</td>
+<td><a href="#category_descrption_section">Category</a> List</td>
 <td>Yes</td>
 <td></td>
 </tr>
@@ -665,7 +665,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 <tr>
 <td>meta_fields</td>
-<td>Metadata List</td>
+<td><a href="#metadata_description_section">Metadata</a> List</td>
 <td>Yes</td>
 <td></td>
 </tr>
@@ -686,7 +686,49 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <aside class="success">
 Remember — To have a successful response, you cannot add the attibute which is not included in the above table.
 </aside>
-<h3 id='category-description'>Category Description</h3><h3 id='metadata-description'>Metadata Description</h3><h2 id='insert-products'>Insert Products</h2>
+<h3 id='category-description'><a id="category_descrption_section">Category Description</a></h3>
+<p>The categories attribute consists of a list of category objects. You can add multiple category objects in the list to descript your product.</p>
+
+<blockquote>
+<p>Example of a categories attibute:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"cat_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"cat_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clothing"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"cat_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"cat_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sofa"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<aside class="success">
+Remember — To add a category object, you should only contain **cat_id** and **cat_name** in it.
+</aside>
+<h3 id='metadata-description'><a id="metadata_description_section">Metadata Description</a></h3>
+<p>The meta_fields attribute consists of a list of metadata object. You can add multiple metadata objects in the list to provide any kind of extra data for the product.</p>
+
+<blockquote>
+<p>Example of a categories attibute:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="nl">"meta_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"country"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUS"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delivery"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ship"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<aside class="success">
+Remember — To add a metadata object, you should only contain **key**, **value** and **type** in it.
+</aside>
+<h2 id='insert-products'>Insert Products</h2>
 <blockquote>
 <p>Example of how to insert new products:</p>
 </blockquote>
