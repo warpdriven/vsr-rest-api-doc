@@ -166,7 +166,7 @@ stock_quantity | String | Yes |
 stock_status | Integer | Yes | 
 description | String | Yes | 
 short_description | String | Yes | 
-categories | Category List | Yes | 
+categories | [Category](#category_descrption_section) List | Yes | 
 brand | String | Yes | 
 main_image_url | String | Yes | 
 image_urls | String List | Yes | 
@@ -184,7 +184,7 @@ related_ids | Interger List | Yes |
 weight | Float | Yes | 
 colour | String | Yes | 
 size | String | Yes |
-meta_fields | Metadata List | Yes | 
+meta_fields | [Metadata](#metadata_description_section) List | Yes | 
 date_created_gmt | Date | Yes |  
 date_modified_gmt | Date | Yes |   
 
@@ -192,9 +192,53 @@ date_modified_gmt | Date | Yes |
 Remember — To have a successful response, you cannot add the attibute which is not included in the above table.
 </aside>
 
-### Category Description
+### <a id="category_descrption_section">Category Description</a>
 
-### Metadata Description
+The categories attribute consists of a list of category objects. You can add multiple category objects in the list to descript your product.
+
+> Example of a categories attibute:
+
+```json
+"categories": [
+                {
+                    "cat_id": 1,
+                    "cat_name": "Clothing"
+                },
+                {
+                    "cat_id": 100,
+                    "cat_name": "Sofa"
+                }
+            ]
+```
+
+<aside class="success">
+Remember — To add a category object, you should only contain **cat_id** and **cat_name** in it.
+</aside>
+
+### <a id="metadata_description_section">Metadata Description</a>
+
+The meta_fields attribute consists of a list of metadata object. You can add multiple metadata objects in the list to provide any kind of extra data for the product.
+
+> Example of a categories attibute:
+
+```json
+"meta_fields": [
+                {
+                    "key": "country",
+                    "value": "AUS",
+                    "type": ""
+                },
+                {
+                    "key": "delivery",
+                    "value": "ship",
+                    "type": ""
+                }
+            ]
+```
+
+<aside class="success">
+Remember — To add a metadata object, you should only contain **key**, **value** and **type** in it.
+</aside>
 
 ## Insert Products
 
