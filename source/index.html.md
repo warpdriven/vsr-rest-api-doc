@@ -492,6 +492,7 @@ For Authorization in the API header, you must replace the dummy <code>X-API-KEY<
     }
 }
 ```
+or
 ```json
 {
     "status": true,
@@ -507,7 +508,7 @@ If you correctly add new products in the request body, and you have enabled the 
 If you try to add the same products more than once, you will receive the response with nothing.
 
 <aside class="success">
-Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attibutes change.
+Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attibutes changed.
 </aside>
 
 ## Update Products
@@ -515,15 +516,93 @@ Our service is able to detect any product change in the attribute level, which m
 > Example of how to update products:
 
 ```shell
+curl --location 'https://example.com/product/update/' \
+--header 'Content-Type: application/json' \
+--header 'X-API-Key: meowmeowmeow' \
+--data '{
+    "update_items": [
+        {
+            "shop_variant_id": "001",
+            "short_description": "changed description 001",
+            "main_image_url": "changed_url_001.com"
+        },
+        {
+            "shop_variant_id": "002",
+            "short_description": "changed description 002",
+            "main_image_url": "changed_url_001.com"
+        }
+    ]
+}'
 ```
 
 ```python
+import requests
+import json
+
+url = "https://example.com/product/update/"
+
+payload = json.dumps({
+  "update_items": [
+    {
+      "shop_variant_id": "001",
+      "short_description": "changed description 001",
+      "main_image_url": "changed_image_url_001.com"
+    },
+    {
+      "shop_variant_id": "002",
+      "short_description": "changed description 002",
+      "main_image_url": "changed_image_url_002.com"
+    }
+  ]
+})
+headers = {
+  'Content-Type': 'application/json',
+  'X-API-Key': 'meowmeowmeow'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
 ```
 
 ```javascript
+const axios = require('axios');
+let data = JSON.stringify({
+  "update_items": [
+    {
+      "shop_variant_id": "001",
+      "short_description": "changed description 001",
+      "main_image_url": "changed_url_001.com"
+    },
+    {
+      "shop_variant_id": "002",
+      "short_description": "changed description 002",
+      "main_image_url": "changed_url_001.com"
+    }
+  ]
+});
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://example.com/product/update/',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'X-API-Key': 'meowmeowmeow'
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
 ```
 
-This is the place to decribe the API
+This API is used to update those products which exists in our services. You can provide the comprehensive product property with changed attributes or only provide those changed attibutes, but the shop_variant_id is required.
 
 `X-API-KEY: meowmeowmeow`
 
@@ -555,6 +634,7 @@ Second, for authorization in the API header, you must replace the dummy <code>X-
     }
 }
 ```
+or
 ```json
 {
     "status": true,
@@ -647,7 +727,7 @@ This is the used to delete products from our services. To delete the product, yo
 
 Data | Description
 --------- | -----------
-delete_shop_variant_ids | The list of shop_variant_id 
+delete_shop_variant_ids | The list of [shop_variant_id](#product-property) 
 
 <aside class="notice">
 For authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
@@ -664,5 +744,11 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
     "data": null
 }
 ```
+
+The sccessful response will not return any data back, but you should be able to see the message.
+
+<aside class="notice">
+We allow you provide those shop variant ids which doesn't exist in the service actually, and we will just ignore them.
+</aside>
 
 # Visually Similar Search API
