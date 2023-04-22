@@ -92,9 +92,9 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
-# Nuwa
+# Nuwa API
 
-## Product Property
+## <a id="product_property">Product Property</a>
 
 Our API allows you to manage the product. We define a standard product object, which includes crucial and basic properties to describe the product.
 
@@ -192,7 +192,7 @@ date_modified_gmt | Date | Yes |
 Remember — To have a successful response, you cannot add the attibute which is not included in the above table.
 </aside>
 
-### <a id="category_descrption_section">Category Description</a>
+## <a id="category_descrption_section">Category Description</a>
 
 The categories attribute consists of a list of category objects. You can add multiple category objects in the list to descript your product.
 
@@ -212,10 +212,10 @@ The categories attribute consists of a list of category objects. You can add mul
 ```
 
 <aside class="success">
-Remember — To add a category object, you should only contain **cat_id** and **cat_name** in it.
+Remember — To add a category object, you should only contain <code>cat_id</code> and <code>cat_name</code> in it.
 </aside>
 
-### <a id="metadata_description_section">Metadata Description</a>
+## <a id="metadata_description_section">Metadata Description</a>
 
 The meta_fields attribute consists of a list of metadata object. You can add multiple metadata objects in the list to provide any kind of extra data for the product.
 
@@ -237,7 +237,7 @@ The meta_fields attribute consists of a list of metadata object. You can add mul
 ```
 
 <aside class="success">
-Remember — To add a metadata object, you should only contain **key**, **value** and **type** in it.
+Remember — To add a metadata object, you should only contain <code>key</code>, <code>value</code> and <code>type</code> in it.
 </aside>
 
 ## Insert Products
@@ -454,18 +454,44 @@ The product data should be attached to the POST Body part.
 
 `POST /product/upsert/`
 
-### Query Parameters
+### Request Body
 
-Parameter | Default | Description
---------- | ------- | -----------
-items | [] | The array of products
+Data | Description
+--------- | -----------
+items | The list of [product object](#product_property)
 
 <aside class="notice">
-For **Authorization** in the API header, you must replace the **X-API-KEY** API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
+For Authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
 </aside>
+
+### Response
+
+<aside class="success">
+success
+</aside>
+
+I have description here
+
+```json
+{
+    "status": true,
+    "msg": "Started Warp Driven Visual Search products init successfully.",
+    "data": {
+        "task_id": "{task_id}"
+    }
+}
+
+{
+    "status": true,
+    "msg": "There is no new product or updated product!",
+    "data": {
+        "task_id": null
+    }
+}
+```
 
 ## Update Products
 
 ## Delete Products
 
-# Visually Similar Search
+# Visually Similar Search API
