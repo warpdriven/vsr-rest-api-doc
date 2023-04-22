@@ -491,9 +491,9 @@ For Authorization in the API header, you must replace the dummy <code>X-API-KEY<
         "task_id": "{task_id}"
     }
 }
-```
+
 or
-```json
+
 {
     "status": true,
     "msg": "There is no new product or updated product!",
@@ -508,7 +508,7 @@ If you correctly add new products in the request body, and you have enabled the 
 If you try to add the same products more than once, you will receive the response with nothing.
 
 <aside class="success">
-Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attibutes changed.
+Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attributes changed.
 </aside>
 
 ## Update Products
@@ -633,9 +633,9 @@ Second, for authorization in the API header, you must replace the dummy <code>X-
         "task_id": "{task_id}"
     }
 }
-```
+
 or
-```json
+
 {
     "status": true,
     "msg": "There is no new product or updated product!",
@@ -648,6 +648,10 @@ or
 If you correctly add updated products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.
 
 If you try to add the same products more than once, you will receive the response with nothing.
+
+<aside class="success">
+Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attributes changed.
+</aside>
 
 ## Delete Products
 
