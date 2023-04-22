@@ -330,13 +330,13 @@
             <a href="#nuwa-api" class="toc-h1 toc-link" data-title="Nuwa API">Nuwa API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#product-property" class="toc-h2 toc-link" data-title="Product Property"><a id="product_property">Product Property</a></a>
+                    <a href="#product-property" class="toc-h2 toc-link" data-title="Product Property">Product Property</a>
                   </li>
                   <li>
-                    <a href="#category-description" class="toc-h2 toc-link" data-title="Category Description"><a id="category_descrption_section">Category Description</a></a>
+                    <a href="#category-property" class="toc-h2 toc-link" data-title="Category Property">Category Property</a>
                   </li>
                   <li>
-                    <a href="#metadata-description" class="toc-h2 toc-link" data-title="Metadata Description"><a id="metadata_description_section">Metadata Description</a></a>
+                    <a href="#metadata-property" class="toc-h2 toc-link" data-title="Metadata Property">Metadata Property</a>
                   </li>
                   <li>
                     <a href="#insert-products" class="toc-h2 toc-link" data-title="Insert Products">Insert Products</a>
@@ -432,7 +432,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <aside class="warning">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
-<h1 id='nuwa-api'>Nuwa API</h1><h2 id='product-property'><a id="product_property">Product Property</a></h2>
+<h1 id='nuwa-api'>Nuwa API</h1><h2 id='product-property'>Product Property</h2>
 <p>Our API allows you to manage the product. We define a standard product object, which includes crucial and basic properties to describe the product.</p>
 
 <blockquote>
@@ -563,7 +563,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 <tr>
 <td>categories</td>
-<td><a href="#category_descrption_section">Category</a> List</td>
+<td><a href="#category-property">Category</a> List</td>
 <td>Yes</td>
 <td></td>
 </tr>
@@ -671,7 +671,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 <tr>
 <td>meta_fields</td>
-<td><a href="#metadata_description_section">Metadata</a> List</td>
+<td><a href="#metadata-property">Metadata</a> List</td>
 <td>Yes</td>
 <td></td>
 </tr>
@@ -692,7 +692,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <aside class="success">
 Remember — To have a successful response, you cannot add the attibute which is not included in the above table.
 </aside>
-<h2 id='category-description'><a id="category_descrption_section">Category Description</a></h2>
+<h2 id='category-property'>Category Property</h2>
 <p>The categories attribute consists of a list of category objects. You can add multiple category objects in the list to descript your product.</p>
 
 <blockquote>
@@ -712,7 +712,7 @@ Remember — To have a successful response, you cannot add the attibute which is
 <aside class="success">
 Remember — To add a category object, you should only contain <code>cat_id</code> and <code>cat_name</code> in it.
 </aside>
-<h2 id='metadata-description'><a id="metadata_description_section">Metadata Description</a></h2>
+<h2 id='metadata-property'>Metadata Property</h2>
 <p>The meta_fields attribute consists of a list of metadata object. You can add multiple metadata objects in the list to provide any kind of extra data for the product.</p>
 
 <blockquote>
@@ -946,7 +946,7 @@ Remember — To add a metadata object, you should only contain <code>key</code>,
 </thead><tbody>
 <tr>
 <td>items</td>
-<td>The list of <a href="#product_property">product object</a></td>
+<td>The list of <a href="#product-property">product object</a></td>
 </tr>
 </tbody></table>
 
@@ -955,10 +955,12 @@ For Authorization in the API header, you must replace the dummy <code>X-API-KEY<
 </aside>
 <h3 id='response'>Response</h3>
 <aside class="success">
-success
+Successful response
 </aside>
 
-<p>I have description here</p>
+<blockquote>
+<p>Successful response example: </p>
+</blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Started Warp Driven Visual Search products init successfully."</span><span class="p">,</span><span class="w">
@@ -974,7 +976,11 @@ success
         </span><span class="nl">"task_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='update-products'>Update Products</h2><h2 id='delete-products'>Delete Products</h2><h1 id='visually-similar-search-api'>Visually Similar Search API</h1><h1 id='errors'>Errors</h1>
+</span></code></pre></div>
+<p>If you correctly add new products in the request body, and you have enabled the VS service, you should be able to receive the task id in the response, which can be used to furtherly query the VS job status.</p>
+
+<p>If you submit the same product, you will receive the response with nothing.</p>
+<h2 id='update-products'>Update Products</h2><h2 id='delete-products'>Delete Products</h2><h1 id='visually-similar-search-api'>Visually Similar Search API</h1><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
