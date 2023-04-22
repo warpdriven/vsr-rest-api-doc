@@ -1014,27 +1014,109 @@ For Authorization in the API header, you must replace the dummy <code>X-API-KEY<
         </span><span class="nl">"task_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{task_id}"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There is no new product or updated product!"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"task_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<p>or
+<code>json
+{
+    &quot;status&quot;: true,
+    &quot;msg&quot;: &quot;There is no new product or updated product!&quot;,
+    &quot;data&quot;: {
+        &quot;task_id&quot;: null
+    }
+}
+</code></p>
+
 <p>If you correctly add new products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.</p>
 
 <p>If you try to add the same products more than once, you will receive the response with nothing.</p>
 
 <aside class="success">
-Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attibutes change.
+Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attibutes changed.
 </aside>
 <h2 id='update-products'>Update Products</h2>
 <blockquote>
 <p>Example of how to update products:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code></code></pre></div>
-<p>This is the place to decribe the API</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://example.com/product/update/'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-Key: meowmeowmeow'</span> <span class="se">\</span>
+<span class="nt">--data</span> <span class="s1">'{
+    "update_items": [
+        {
+            "shop_variant_id": "001",
+            "short_description": "changed description 001",
+            "main_image_url": "changed_url_001.com"
+        },
+        {
+            "shop_variant_id": "002",
+            "short_description": "changed description 002",
+            "main_image_url": "changed_url_001.com"
+        }
+    ]
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://example.com/product/update/"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">({</span>
+  <span class="s">"update_items"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s">"shop_variant_id"</span><span class="p">:</span> <span class="s">"001"</span><span class="p">,</span>
+      <span class="s">"short_description"</span><span class="p">:</span> <span class="s">"changed description 001"</span><span class="p">,</span>
+      <span class="s">"main_image_url"</span><span class="p">:</span> <span class="s">"changed_image_url_001.com"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">"shop_variant_id"</span><span class="p">:</span> <span class="s">"002"</span><span class="p">,</span>
+      <span class="s">"short_description"</span><span class="p">:</span> <span class="s">"changed description 002"</span><span class="p">,</span>
+      <span class="s">"main_image_url"</span><span class="p">:</span> <span class="s">"changed_image_url_002.com"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">})</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'X-API-Key'</span><span class="p">:</span> <span class="s">'meowmeowmeow'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="dl">"</span><span class="s2">update_items</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">shop_variant_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">001</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">short_description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">changed description 001</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">main_image_url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">changed_url_001.com</span><span class="dl">"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="dl">"</span><span class="s2">shop_variant_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">002</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">short_description</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">changed description 002</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">main_image_url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">changed_url_001.com</span><span class="dl">"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">});</span>
+
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">maxBodyLength</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://example.com/product/update/</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span><span class="p">,</span> 
+    <span class="dl">'</span><span class="s1">X-API-Key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span>
+  <span class="p">},</span>
+  <span class="na">data</span> <span class="p">:</span> <span class="nx">data</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>This API is used to update those products which exists in our services. You can provide the comprehensive product property with changed attributes or only provide those changed attibutes, but the shop_variant_id is required.</p>
 
 <p><code>X-API-KEY: meowmeowmeow</code></p>
 <h3 id='http-request-3'>HTTP Request</h3>
@@ -1067,14 +1149,18 @@ Second, for authorization in the API header, you must replace the dummy <code>X-
         </span><span class="nl">"task_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{task_id}"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There is no new product or updated product!"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"task_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<p>or
+<code>json
+{
+    &quot;status&quot;: true,
+    &quot;msg&quot;: &quot;There is no new product or updated product!&quot;,
+    &quot;data&quot;: {
+        &quot;task_id&quot;: null
+    }
+}
+</code></p>
+
 <p>If you correctly add updated products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.</p>
 
 <p>If you try to add the same products more than once, you will receive the response with nothing.</p>
@@ -1150,7 +1236,7 @@ Second, for authorization in the API header, you must replace the dummy <code>X-
 </thead><tbody>
 <tr>
 <td>delete_shop_variant_ids</td>
-<td>The list of shop_variant_id</td>
+<td>The list of <a href="#product-property">shop_variant_id</a></td>
 </tr>
 </tbody></table>
 
@@ -1166,7 +1252,13 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
     </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{num_of_products} products have been successfully deleted!"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h1 id='visually-similar-search-api'>Visually Similar Search API</h1><h1 id='errors'>Errors</h1>
+</span></code></pre></div>
+<p>The sccessful response will not return any data back, but you should be able to see the message.</p>
+
+<aside class="notice">
+We allow you provide those shop variant ids which doesn't exist in the service actually, and we will just ignore them.
+</aside>
+<h1 id='visually-similar-search-api'>Visually Similar Search API</h1><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
