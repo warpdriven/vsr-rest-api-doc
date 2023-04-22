@@ -1014,24 +1014,23 @@ For Authorization in the API header, you must replace the dummy <code>X-API-KEY<
         </span><span class="nl">"task_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{task_id}"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>or
-<code>json
-{
-    &quot;status&quot;: true,
-    &quot;msg&quot;: &quot;There is no new product or updated product!&quot;,
-    &quot;data&quot;: {
-        &quot;task_id&quot;: null
-    }
-}
-</code></p>
 
+</span><span class="err">or</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There is no new product or updated product!"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"task_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>If you correctly add new products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.</p>
 
 <p>If you try to add the same products more than once, you will receive the response with nothing.</p>
 
 <aside class="success">
-Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attibutes changed.
+Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attributes changed.
 </aside>
 <h2 id='update-products'>Update Products</h2>
 <blockquote>
@@ -1149,21 +1148,24 @@ Second, for authorization in the API header, you must replace the dummy <code>X-
         </span><span class="nl">"task_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{task_id}"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>or
-<code>json
-{
-    &quot;status&quot;: true,
-    &quot;msg&quot;: &quot;There is no new product or updated product!&quot;,
-    &quot;data&quot;: {
-        &quot;task_id&quot;: null
-    }
-}
-</code></p>
 
+</span><span class="err">or</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There is no new product or updated product!"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"task_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p>If you correctly add updated products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.</p>
 
 <p>If you try to add the same products more than once, you will receive the response with nothing.</p>
+
+<aside class="success">
+Our service is able to detect any product change in the attribute level, which means delta data. In this way, insert API should only be used to add new products or products with any attributes changed.
+</aside>
 <h2 id='delete-products'>Delete Products</h2>
 <blockquote>
 <p>Example of how to delete products:</p>
