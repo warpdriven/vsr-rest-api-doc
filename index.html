@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta
             name="description"
-            content="Documentation for the Kittn API"
+            content="Documentation for the Warp Driven API"
         >
     <title>API Reference</title>
 
@@ -327,6 +327,14 @@
               </ul>
           </li>
           <li>
+            <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#workflow" class="toc-h2 toc-link" data-title="Workflow">Workflow</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#nuwa-api" class="toc-h1 toc-link" data-title="Nuwa API">Nuwa API</a>
               <ul class="toc-list-h2">
                   <li>
@@ -350,7 +358,7 @@
               </ul>
           </li>
           <li>
-            <a href="#visually-similar-search-api" class="toc-h1 toc-link" data-title="Visually Similar Search API">Visually Similar Search API</a>
+            <a href="#visually-similar-recommendation-api" class="toc-h1 toc-link" data-title="Visually Similar Recommendation API">Visually Similar Recommendation API</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
@@ -432,7 +440,16 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <aside class="warning">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
-<h1 id='nuwa-api'>Nuwa API</h1><h2 id='product-property'>Product Property</h2>
+<h1 id='overview'>Overview</h1><h2 id='workflow'>Workflow</h2>
+<blockquote>
+<p>Here is a simple flow chart:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>graph TD;
+    A--&gt;B;
+    A--&gt;C;
+    B--&gt;D;
+    C--&gt;D;
+</code></pre></div><h1 id='nuwa-api'>Nuwa API</h1><h2 id='product-property'>Product Property</h2>
 <p>Our API allows you to manage the product. We define a standard product object, which includes crucial and basic properties to describe the product.</p>
 
 <blockquote>
@@ -1025,7 +1042,7 @@ For Authorization in the API header, you must replace the dummy <code>X-API-KEY<
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>If you correctly add new products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.</p>
+<p>If you correctly add new products in the request body, and you have enabled the visually similar recommendation service, you should receive the task id in the response, which can be used to furtherly query the visually similar recommendation job status.</p>
 
 <p>If you try to add the same products more than once, you will receive the response with nothing.</p>
 
@@ -1159,7 +1176,7 @@ Second, for authorization in the API header, you must replace the dummy <code>X-
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>If you correctly add updated products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.</p>
+<p>If you correctly add updated products in the request body, and you have enabled the visually similar recommendation service, you should receive the task id in the response, which can be used to furtherly query the visually similar recommendation job status.</p>
 
 <p>If you try to add the same products more than once, you will receive the response with nothing.</p>
 
@@ -1260,7 +1277,7 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
 <aside class="notice">
 We allow you provide those shop variant ids which doesn't exist in the service actually, and we will just ignore them.
 </aside>
-<h1 id='visually-similar-search-api'>Visually Similar Search API</h1><h1 id='errors'>Errors</h1>
+<h1 id='visually-similar-recommendation-api'>Visually Similar Recommendation API</h1><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
