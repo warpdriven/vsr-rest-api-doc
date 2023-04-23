@@ -20,7 +20,7 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the Warp Driven API
 ---
 
 # Introduction
@@ -91,6 +91,20 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <aside class="warning">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
+
+# Overview
+
+## Workflow
+
+> Here is a simple flow chart:
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 
 # Nuwa API
 
@@ -503,7 +517,7 @@ or
 }
 ```
 
-If you correctly add new products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.
+If you correctly add new products in the request body, and you have enabled the visually similar recommendation service, you should receive the task id in the response, which can be used to furtherly query the visually similar recommendation job status.
 
 If you try to add the same products more than once, you will receive the response with nothing.
 
@@ -645,7 +659,7 @@ or
 }
 ```
 
-If you correctly add updated products in the request body, and you have enabled the VS service, you should receive the task id in the response, which can be used to furtherly query the VS job status.
+If you correctly add updated products in the request body, and you have enabled the visually similar recommendation service, you should receive the task id in the response, which can be used to furtherly query the visually similar recommendation job status.
 
 If you try to add the same products more than once, you will receive the response with nothing.
 
@@ -755,4 +769,4 @@ The sccessful response will not return any data back, but you should be able to 
 We allow you provide those shop variant ids which doesn't exist in the service actually, and we will just ignore them.
 </aside>
 
-# Visually Similar Search API
+# Visually Similar Recommendation API
