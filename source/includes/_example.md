@@ -4,6 +4,10 @@ example image:
 ![Sonny and Mariel high fiving.](https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png)
 
 
+HTML code with size:
+
+[<img alt="alt_text" width="400px" src="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png"/>]
+
 
 example video:
 
