@@ -319,14 +319,6 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#example" class="toc-h1 toc-link" data-title="Example">Example</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#delete-api-example" class="toc-h2 toc-link" data-title="Delete API example">Delete API example</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
             <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
               <ul class="toc-list-h2">
                   <li>
@@ -363,6 +355,14 @@
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
+          <li>
+            <a href="#example" class="toc-h1 toc-link" data-title="Example">Example</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#delete-api-example" class="toc-h2 toc-link" data-title="Delete API example">Delete API example</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://warp-driven.com/'>Documentation Powered by Warp Driven</a></li>
@@ -384,62 +384,6 @@
 <p>Whether you are a developer looking to integrate our services into your e-commerce website, or a business owner looking to improve your online shopping experience, our API documentation will provide you with all the information you need to get started.</p>
 
 <p>You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-<h1 id='example'>Example</h1><h2 id='delete-api-example'>Delete API example</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"This is an example"</span><span class="p">)</span>
-</code></pre></div>
-<blockquote>
-<p>JSON response example:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">000</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>Make sure to use Warp Driven assigned <code>X-API-KEY</code>.</p>
-</blockquote>
-
-<p>This is an example API for document.
-For <strong>Authorization</strong> in API header, please add the ==X-API-KEY== API key, which is assigned by Warp Driven.</p>
-
-<p><code>X-API-KEY: abcabc</code></p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>test_param_1</td>
-<td>false</td>
-<td>Test is test.</td>
-</tr>
-<tr>
-<td>test_param_2</td>
-<td>true</td>
-<td>Test is test 2.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-You must replace <code>abcabc</code> with your personal API key.
-</aside>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<aside class="warning">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
 <h1 id='overview'>Overview</h1><h2 id='workflow'>Workflow</h2>
 <blockquote>
 <p>Here is a simple flow chart:</p>
@@ -1002,7 +946,7 @@ Remember — To add a metadata object, you should only contain <code>key</code>,
 <p>The product data should be attached to the POST Body part.</p>
 
 <p><code>X-API-KEY: meowmeowmeow</code></p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='http-request'>HTTP Request</h3>
 <p><code>POST /product/upsert/</code></p>
 <h3 id='request-body'>Request Body</h3>
 <table><thead>
@@ -1135,7 +1079,7 @@ Our service is able to detect any product change in the attribute level, which m
 <p>This API is used to update those products which exists in our services. You can provide the comprehensive product property with changed attributes or only provide those changed attibutes, but the shop_variant_id is required.</p>
 
 <p><code>X-API-KEY: meowmeowmeow</code></p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-2'>HTTP Request</h3>
 <p><code>POST /product/update/</code></p>
 <h3 id='request-body-2'>Request Body</h3>
 <table><thead>
@@ -1244,7 +1188,7 @@ Our service is able to detect any product change in the attribute level, which m
 <p>This is the used to delete products from our services. To delete the product, you have to provide shop_variant_id.</p>
 
 <p><code>X-API-KEY: meowmeowmeow</code></p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST /product/delete/</code></p>
 <h3 id='request-body-3'>Request Body</h3>
 <table><thead>
@@ -1335,6 +1279,69 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 <td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
+<h1 id='example'>Example</h1>
+<p>example image:
+<img src="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" alt="Sonny and Mariel high fiving." /></p>
+
+<p>example video:</p>
+
+<p><img src="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" alt="image search api" /><a href="https://www.youtube.com/watch?v=3HIr0imLgxM">(Youtube)</a></p>
+<h2 id='delete-api-example'>Delete API example</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
+  <span class="nt">-X</span> DELETE <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"This is an example"</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>JSON response example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Make sure to use Warp Driven assigned <code>X-API-KEY</code>.</p>
+</blockquote>
+
+<p>This is an example API for document.
+For <strong>Authorization</strong> in API header, please add the ==X-API-KEY== API key, which is assigned by Warp Driven.</p>
+
+<p><code>X-API-KEY: abcabc</code></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/api/kittens</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>test_param_1</td>
+<td>false</td>
+<td>Test is test.</td>
+</tr>
+<tr>
+<td>test_param_2</td>
+<td>true</td>
+<td>Test is test 2.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+You must replace <code>abcabc</code> with your personal API key.
+</aside>
+
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
+
+<aside class="warning">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
 
       </div>
       <div class="dark-box">
