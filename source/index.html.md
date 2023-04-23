@@ -12,7 +12,9 @@ toc_footers:
   - <a href='https://warp-driven.com/'>Abourt Us</a>
 
 includes:
+  - vsr
   - errors
+  - example
 
 search: true
 
@@ -36,61 +38,6 @@ This document will provide a comprehensive guide to our API, including instructi
 Whether you are a developer looking to integrate our services into your e-commerce website, or a business owner looking to improve your online shopping experience, our API documentation will provide you with all the information you need to get started.
 
 You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-# Example
-
-## Delete API example
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```python
-import os
-
-print(f"This is an example")
-```
-
-> JSON response example:
-
-```json
-{
-  "id": 000,
-  "deleted" : ":("
-}
-```
-
-> Make sure to use Warp Driven assigned `X-API-KEY`.
-
-This is an example API for document.
-For **Authorization** in API header, please add the ==X-API-KEY== API key, which is assigned by Warp Driven.
-
-`X-API-KEY: abcabc`
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-test_param_1 | false | Test is test.
-test_param_2 | true | Test is test 2.
-
-<aside class="success">
-You must replace <code>abcabc</code> with your personal API key.
-</aside>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<aside class="warning">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
 
 # Overview
 
@@ -769,4 +716,3 @@ The sccessful response will not return any data back, but you should be able to 
 We allow you provide those shop variant ids which doesn't exist in the service actually, and we will just ignore them.
 </aside>
 
-# Visually Similar Recommendation API
