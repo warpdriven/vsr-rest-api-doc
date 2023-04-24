@@ -657,6 +657,6 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
 
 The sccessful response will not return any data back, but you should be able to see the message.
 
-<aside class="notice">
+<aside class="success">
 We allow you provide those shop variant ids which doesn't exist in the service actually, and we will just ignore them.
 </aside>
