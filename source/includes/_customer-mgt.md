@@ -5,40 +5,61 @@
 > Example of how to :
 
 ```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
+curl --location 'https://example.com/erp_user?erp_user_email=example@example.com'
 ```
 
 ```python
-import os
+import requests
 
-print(f"This is an example")
+url = "https://example.com/erp_user?erp_user_email=example@example.com"
+
+payload = {}
+headers = {}
+
+response = requests.request("GET", url, headers=headers, data=payload)
 ```
 
-Describe this API from here...
+```javascript
+const axios = require('axios');
 
-`X-API-KEY: meowmeowmeow`
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'https://example.com/erp_user?erp_user_email=example@example.com',
+  headers: { }
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+```
+
+This API is used to check if the user existed or not. We are using the email of ERP user account to distinguish the unique user. To create an ERP account, please check [ERP Workflow](#erp-workflow).
 
 ### HTTP Request
 
-`POST /product/delete/`
+`GET /erp_user?erp_user_email={user_email}`
 
-### Request Body
+### Request Parameters
 
-Data | Description
+Parameter | Description
 --------- | -----------
-delete_shop_variant_ids | The list of [shop_variant_id](#product-property) 
-
-<aside class="notice">
-For authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
-</aside>
+erp_user_email | user account email
 
 ### Response
 
 > Successful response example:
 
 ```json
+{
+    "status": true,
+    "msg": "User Query",
+    "data": false
+}
 ```
 
 ## Create User
