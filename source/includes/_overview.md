@@ -6,7 +6,17 @@ Our ERP system is used to manage the user account. You should register a WarpDri
 
 To register a WarpDriven account, please go to our [offical website](https://warp-driven.com). You will also need to choose a plan and subscribe it, and check it from [here](https://erp.warp-driven.com/@/subscription).
 
-### Description
+
+### <a id="plan-id">About Plan ID</a>
+
+When you choose the plan, there are a few options.We are using **plan id** in our API to represent each plan.
+
+Plan Name | Plan ID
+--------- | --------
+Visually Similar Recommendation | 1
+NLP | 11
+
+### Workflow
 
 The workflow graph is below:
 
@@ -15,7 +25,7 @@ The workflow graph is below:
 
 ## Customer Management Service Workflow
 
-### Description
+### Workflow
 
 The workflow graph is below:
 
