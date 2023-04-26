@@ -428,11 +428,29 @@
 <p>Our ERP system is used to manage the user account. You should register a WarpDriven account and subscribe the plan before integrating your services or using our APIs.</p>
 
 <p>To register a WarpDriven account, please go to our <a href="https://warp-driven.com">offical website</a>. You will also need to choose a plan and subscribe it, and check it from <a href="https://erp.warp-driven.com/@/subscription">here</a>.</p>
-<h3 id='description'>Description</h3>
+<h3 id='about-plan-id'><a id="plan-id">About Plan ID</a></h3>
+<p>When you choose the plan, there are a few options.We are using <strong>plan id</strong> in our API to represent each plan.</p>
+
+<table><thead>
+<tr>
+<th>Plan Name</th>
+<th>Plan ID</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Visually Similar Recommendation</td>
+<td>1</td>
+</tr>
+<tr>
+<td>NLP</td>
+<td>11</td>
+</tr>
+</tbody></table>
+<h3 id='workflow'>Workflow</h3>
 <p>The workflow graph is below:</p>
 
 <p><img alt="alt_text" width="auto" src="https://github.com/warpdriven/vsr-rest-api-doc/blob/dev/images/erp.png?raw=true"/></p>
-<h2 id='customer-management-service-workflow'>Customer Management Service Workflow</h2><h3 id='description-2'>Description</h3>
+<h2 id='customer-management-service-workflow'>Customer Management Service Workflow</h2><h3 id='workflow-2'>Workflow</h3>
 <p>The workflow graph is below:</p>
 
 <p><img alt="alt_text" width="auto" src="https://github.com/warpdriven/vsr-rest-api-doc/blob/dev/images/customer-mgt-service.png?raw=true"/></p>
@@ -498,21 +516,128 @@ For Authorization, in any API example, you must replace the dummy <code>X-API-KE
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='create-user'>Create User</h2>
 <blockquote>
-<p>Example of how to :</p>
+<p>Example of how to create an user:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://example.com/erp_user/create'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "email": "j.smith@test4.com",
+    "password": "test",
+    "name": "John Smith",
+    "phone": "02323333",
+    "language": "fr",
+    "platform_type": 1,
+    "shop_code": "jsmith",
+    "shop_name": "John Smith Test Store",
+    "website": "shop.apple.com",
+    "address1": "1 Infinite Loop",
+    "address2": "Suite 100",
+    "city": "Cupertino",
+    "state": "California",
+    "zip": "95014",
+    "country": "United States",
+    "currency": "USD",
+    "created_time": "2007-12-31T19:00:00-05:00",
+    "updated_time": "2007-12-31T19:00:00-05:00",
+    "timezone": "America/New_York",
+    "latitude": 45.427408,
+    "longitude": -75.68903,
+    "multi_location_enabled": true,
+    "cookie_consent_level": "implicit",
+    "tags": ["enterprise"]
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"This is an example"</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://example.com/erp_user/create"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">({</span>
+  <span class="s">"email"</span><span class="p">:</span> <span class="s">"j.smith@test4.com"</span><span class="p">,</span>
+  <span class="s">"password"</span><span class="p">:</span> <span class="s">"test"</span><span class="p">,</span>
+  <span class="s">"name"</span><span class="p">:</span> <span class="s">"John Smith"</span><span class="p">,</span>
+  <span class="s">"phone"</span><span class="p">:</span> <span class="s">"02323333"</span><span class="p">,</span>
+  <span class="s">"language"</span><span class="p">:</span> <span class="s">"fr"</span><span class="p">,</span>
+  <span class="s">"platform_type"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s">"shop_code"</span><span class="p">:</span> <span class="s">"jsmith"</span><span class="p">,</span>
+  <span class="s">"shop_name"</span><span class="p">:</span> <span class="s">"John Smith Test Store"</span><span class="p">,</span>
+  <span class="s">"website"</span><span class="p">:</span> <span class="s">"shop.apple.com"</span><span class="p">,</span>
+  <span class="s">"address1"</span><span class="p">:</span> <span class="s">"1 Infinite Loop"</span><span class="p">,</span>
+  <span class="s">"address2"</span><span class="p">:</span> <span class="s">"Suite 100"</span><span class="p">,</span>
+  <span class="s">"city"</span><span class="p">:</span> <span class="s">"Cupertino"</span><span class="p">,</span>
+  <span class="s">"state"</span><span class="p">:</span> <span class="s">"California"</span><span class="p">,</span>
+  <span class="s">"zip"</span><span class="p">:</span> <span class="s">"95014"</span><span class="p">,</span>
+  <span class="s">"country"</span><span class="p">:</span> <span class="s">"United States"</span><span class="p">,</span>
+  <span class="s">"currency"</span><span class="p">:</span> <span class="s">"USD"</span><span class="p">,</span>
+  <span class="s">"created_time"</span><span class="p">:</span> <span class="s">"2007-12-31T19:00:00-05:00"</span><span class="p">,</span>
+  <span class="s">"updated_time"</span><span class="p">:</span> <span class="s">"2007-12-31T19:00:00-05:00"</span><span class="p">,</span>
+  <span class="s">"timezone"</span><span class="p">:</span> <span class="s">"America/New_York"</span><span class="p">,</span>
+  <span class="s">"latitude"</span><span class="p">:</span> <span class="mf">45.427408</span><span class="p">,</span>
+  <span class="s">"longitude"</span><span class="p">:</span> <span class="o">-</span><span class="mf">75.68903</span><span class="p">,</span>
+  <span class="s">"multi_location_enabled"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+  <span class="s">"cookie_consent_level"</span><span class="p">:</span> <span class="s">"implicit"</span><span class="p">,</span>
+  <span class="s">"tags"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s">"enterprise"</span>
+  <span class="p">]</span>
+<span class="p">})</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+  <span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">example.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">password</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">example</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">example</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">phone</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">02323333</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">language</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">fr</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">platform_type</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">shop_code</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">jsmith</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">shop_name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John Smith Test Store</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">website</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">shop.apple.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">address1</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1 Infinite Loop</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">address2</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Suite 100</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">city</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Cupertino</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">state</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">California</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">zip</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">95014</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">country</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">United States</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">currency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USD</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">created_time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2007-12-31T19:00:00-05:00</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">updated_time</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2007-12-31T19:00:00-05:00</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timezone</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">America/New_York</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">latitude</span><span class="dl">"</span><span class="p">:</span> <span class="mf">45.427408</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">longitude</span><span class="dl">"</span><span class="p">:</span> <span class="o">-</span><span class="mf">75.68903</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">multi_location_enabled</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">cookie_consent_level</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">implicit</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">tags</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">enterprise</span><span class="dl">"</span>
+  <span class="p">]</span>
+<span class="p">});</span>
+
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">maxBodyLength</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://example.com/erp_user/create</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="dl">'</span><span class="s1">Content-Type</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">application/json</span><span class="dl">'</span>
+  <span class="p">},</span>
+  <span class="na">data</span> <span class="p">:</span> <span class="nx">data</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></div>
-<p>Describe this API from here...</p>
-
-<p><code>X-API-KEY: meowmeowmeow</code></p>
+<p>This API is used to create an user.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>POST /product/delete/</code></p>
+<p><code>POST /erp_user/create</code></p>
 <h3 id='request-body'>Request Body</h3>
+<p>This API requires user&#39;s info in the request body, which includes:</p>
+
 <table><thead>
 <tr>
 <th>Data</th>
@@ -520,34 +645,155 @@ For Authorization, in any API example, you must replace the dummy <code>X-API-KE
 </tr>
 </thead><tbody>
 <tr>
-<td>delete_shop_variant_ids</td>
-<td>The list of <a href="#product-property">shop_variant_id</a></td>
+<td>email</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td></td>
+</tr>
+<tr>
+<td>language</td>
+<td></td>
+</tr>
+<tr>
+<td>platform_type</td>
+<td></td>
+</tr>
+<tr>
+<td>shop_code</td>
+<td></td>
+</tr>
+<tr>
+<td>shop_name</td>
+<td></td>
+</tr>
+<tr>
+<td>website</td>
+<td></td>
+</tr>
+<tr>
+<td>address1</td>
+<td></td>
+</tr>
+<tr>
+<td>address2</td>
+<td></td>
+</tr>
+<tr>
+<td>city</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td></td>
+</tr>
+<tr>
+<td>zip</td>
+<td></td>
+</tr>
+<tr>
+<td>country</td>
+<td></td>
+</tr>
+<tr>
+<td>currency</td>
+<td></td>
+</tr>
+<tr>
+<td>created_time</td>
+<td></td>
+</tr>
+<tr>
+<td>updated_time</td>
+<td></td>
+</tr>
+<tr>
+<td>timezone</td>
+<td></td>
+</tr>
+<tr>
+<td>latitude</td>
+<td></td>
+</tr>
+<tr>
+<td>longitude</td>
+<td></td>
+</tr>
+<tr>
+<td>multi_location_enabled</td>
+<td></td>
+</tr>
+<tr>
+<td>cookie_consent_level</td>
+<td></td>
+</tr>
+<tr>
+<td>tags</td>
+<td></td>
 </tr>
 </tbody></table>
-
-<aside class="notice">
-For authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
-</aside>
 <h3 id='response-2'>Response</h3>
+<p>Please check the response example at right side.</p>
+
 <blockquote>
 <p>Successful response example:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code></code></pre></div><h2 id='create-website'>Create Website</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User Created"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"120"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='create-website'>Create Website</h2>
 <blockquote>
-<p>Example of how to :</p>
+<p>Example of how to create the website record:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://api-stg.warp-driven.com/my_website/create'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "email": "example.com",
+    "password": "test",
+    "website_code": "example_code",
+    "platform_type": 1,
+    "url": "example_website.com"
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"This is an example"</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api-stg.warp-driven.com/my_website/create"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">({</span>
+  <span class="s">"email"</span><span class="p">:</span> <span class="s">"example.com"</span><span class="p">,</span>
+  <span class="s">"password"</span><span class="p">:</span> <span class="s">"test"</span><span class="p">,</span>
+  <span class="s">"website_code"</span><span class="p">:</span> <span class="s">"exampel_code"</span><span class="p">,</span>
+  <span class="s">"platform_type"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s">"url"</span><span class="p">:</span> <span class="s">"example_website.com"</span>
+<span class="p">})</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </code></pre></div>
-<p>Describe this API from here...</p>
+<p>This API is used to create the website under the user account.</p>
 
-<p><code>X-API-KEY: meowmeowmeow</code></p>
+<aside class="notice">
+Each user can create multiple websites.
+</aside>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>POST /product/delete/</code></p>
+<p><code>POST /my_website/create</code></p>
 <h3 id='request-body-2'>Request Body</h3>
 <table><thead>
 <tr>
@@ -556,34 +802,76 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
 </tr>
 </thead><tbody>
 <tr>
-<td>delete_shop_variant_ids</td>
-<td>The list of <a href="#product-property">shop_variant_id</a></td>
+<td>email</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td></td>
+</tr>
+<tr>
+<td>website_code</td>
+<td></td>
+</tr>
+<tr>
+<td>platform_type</td>
+<td></td>
+</tr>
+<tr>
+<td>url</td>
+<td></td>
 </tr>
 </tbody></table>
-
-<aside class="notice">
-For authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
-</aside>
 <h3 id='response-3'>Response</h3>
+<p>Please check the response example at right side.</p>
+
 <blockquote>
 <p>Successful response example:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code></code></pre></div><h2 id='get-website-api-key'>Get Website API Key</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"website_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_code"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"platform_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_website.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meowmeowmeow"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"create_dt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-04-26T11:49:23Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='get-website-api-key'>Get Website API Key</h2>
 <blockquote>
 <p>Example of how to :</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://example.com/my_website'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "email": "example.com",
+    "password": "test",
+    "website_code": "example_website",
+    "platform_type": 1
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"This is an example"</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://example.com/my_website"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">({</span>
+  <span class="s">"email"</span><span class="p">:</span> <span class="s">"example.com"</span><span class="p">,</span>
+  <span class="s">"password"</span><span class="p">:</span> <span class="s">"test"</span><span class="p">,</span>
+  <span class="s">"website_code"</span><span class="p">:</span> <span class="s">"example_website"</span><span class="p">,</span>
+  <span class="s">"platform_type"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">})</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </code></pre></div>
-<p>Describe this API from here...</p>
-
-<p><code>X-API-KEY: meowmeowmeow</code></p>
+<p>Each user can have multiple websites, and we will assign the unique API key for each website, and you can get the API key for the specific website via this API request. </p>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>POST /product/delete/</code></p>
+<p><code>POST /my_website</code></p>
 <h3 id='request-body-3'>Request Body</h3>
 <table><thead>
 <tr>
@@ -592,44 +880,65 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
 </tr>
 </thead><tbody>
 <tr>
-<td>delete_shop_variant_ids</td>
-<td>The list of <a href="#product-property">shop_variant_id</a></td>
+<td>email</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td></td>
+</tr>
+<tr>
+<td>website_code</td>
+<td></td>
+</tr>
+<tr>
+<td>platform_type</td>
+<td></td>
 </tr>
 </tbody></table>
-
-<aside class="notice">
-For authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
-</aside>
 <h3 id='response-4'>Response</h3>
+<p>Please check the example at right side.</p>
+
 <blockquote>
 <p>Successful response example:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code></code></pre></div><h2 id='get-vsr-plan-and-credit'>Get VSR Plan and Credit</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meowmeowmeow"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='get-vsr-plan-and-credit'>Get VSR Plan and Credit</h2>
 <blockquote>
-<p>Example of how to :</p>
+<p>Example of how to get VSR(Visually Similar Recommendation) plan and credit:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://example.com/ai_credit/plan?plan_id=1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-Key: meowmeowmeow'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"This is an example"</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://example.com/ai_credit/plan?plan_id=1"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'X-API-Key'</span><span class="p">:</span> <span class="s">'meowmeowmeow'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </code></pre></div>
-<p>Describe this API from here...</p>
+<p>This API is used to get the current plan detail for those plans you just subscribed when you <a href="#erp-workflow">created the account</a>.</p>
 
 <p><code>X-API-KEY: meowmeowmeow</code></p>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>POST /product/delete/</code></p>
-<h3 id='request-body-4'>Request Body</h3>
+<p><code>GET /ai_credit/plan?plan_id=1</code></p>
+<h3 id='request-parameters-2'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>Data</th>
+<th>Parameter</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>delete_shop_variant_ids</td>
-<td>The list of <a href="#product-property">shop_variant_id</a></td>
+<td><a href="#plan-id">plan_id</a></td>
+<td>The plan type you have chosen when create the account.</td>
 </tr>
 </tbody></table>
 
@@ -640,32 +949,55 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
 <blockquote>
 <p>Successful response example:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code></code></pre></div><h2 id='get-nlp-plan-and-credit'>Get NLP Plan and Credit</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"plan_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"product_credit"</span><span class="p">:</span><span class="w"> </span><span class="mi">3996</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"product_plan_credit"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quota_renewal_date_left"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quota_renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-05-20T06:48:23Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"plan_start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-04-20T06:48:23Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"plan_end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2027-04-20T06:48:23Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='get-nlp-plan-and-credit'>Get NLP Plan and Credit</h2>
 <blockquote>
-<p>Example of how to :</p>
+<p>Example of how to get NLP plan and credit:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://example.com/ai_credit/plan?plan_id=11'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-Key: meowmeowmeow'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"This is an example"</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://example.com/ai_credit/plan?plan_id=11"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'X-API-Key'</span><span class="p">:</span> <span class="s">'meowmeowmeow'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </code></pre></div>
-<p>Describe this API from here...</p>
+<p>This API is used to get the current plan detail for those plans you just subscribed when you <a href="#erp-workflow">created the account</a>.</p>
 
 <p><code>X-API-KEY: meowmeowmeow</code></p>
 <h3 id='http-request-6'>HTTP Request</h3>
-<p><code>POST /product/delete/</code></p>
-<h3 id='request-body-5'>Request Body</h3>
+<p><code>GET /ai_credit/plan?plan_id=11</code></p>
+<h3 id='request-parameters-3'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>Data</th>
+<th>Parameter</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>delete_shop_variant_ids</td>
-<td>The list of <a href="#product-property">shop_variant_id</a></td>
+<td><a href="#plan-id">plan_id</a></td>
+<td>The plan type you have chosen when create the account.</td>
 </tr>
 </tbody></table>
 
@@ -676,7 +1008,24 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
 <blockquote>
 <p>Successful response example:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code></code></pre></div><h1 id='nuwa-api'>Nuwa API</h1><h2 id='product-property'>Product Property</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"plan_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"product_credit"</span><span class="p">:</span><span class="w"> </span><span class="mi">1678</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"product_plan_credit"</span><span class="p">:</span><span class="w"> </span><span class="mi">80000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quota_renewal_date_left"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quota_renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-05-20T07:11:16Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"plan_start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-20T07:11:16Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"plan_end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-05-20T07:11:16Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='nuwa-api'>Nuwa API</h1><h2 id='product-property'>Product Property</h2>
 <p>Our API allows you to manage the product. We define a standard product object, which includes crucial and basic properties to describe the product.</p>
 
 <blockquote>
