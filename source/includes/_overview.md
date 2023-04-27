@@ -1,5 +1,9 @@
 # Overview
 
+WarpDriven Services can be splitted into 3 parts: ERP, customer management service and data/AI services (Nuwa, Visual Search and NLP)
+
+<img alt="alt_text" width="auto" src="https://github.com/warpdriven/vsr-rest-api-doc/blob/dev/images/overview.png?raw=true"/>
+
 ## ERP Workflow
 
 Our ERP system is used to manage the user account. You should register a WarpDriven account and subscribe the plan before integrating your services or using our APIs.
