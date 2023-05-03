@@ -17,7 +17,7 @@ When you choose the plan, there are a few options.We are using **plan id** in ou
 
 Plan Name | Plan ID
 --------- | --------
-Visually Similar Recommendation | 1
+Visual Search | 1
 NLP | 11
 
 ### Workflow
@@ -45,4 +45,14 @@ For Authorization, in any API example, you must replace the dummy <code>X-API-KE
 
 ## Nuwa Workflow
 
-## Visually Similar Recommendation Workflow
+Nuwa is WarpDriven's data storage service. All your products should go through the Nuwa, and Nuwa will save your data into our database. It will also assign the data calculating related jobs to other services. For example, it will launch **Visual Search** jobs if you also require the visual search plan.
+
+<aside class="success">
+Nuwa is able to capture the data change for data update and insert every time and charge the credit appropriately.
+</aside>
+
+## Visual Search Workflow
+
+Visual Search service will be triggered once new product images are coming. This service will automatically calculate the image vector and related features for each new product image. 
+
+Those data will be used to support our AI model and visual search engine.
