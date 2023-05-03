@@ -334,7 +334,7 @@
                     <a href="#nuwa-workflow" class="toc-h2 toc-link" data-title="Nuwa Workflow">Nuwa Workflow</a>
                   </li>
                   <li>
-                    <a href="#visually-similar-recommendation-workflow" class="toc-h2 toc-link" data-title="Visually Similar Recommendation Workflow">Visually Similar Recommendation Workflow</a>
+                    <a href="#visual-search-workflow" class="toc-h2 toc-link" data-title="Visual Search Workflow">Visual Search Workflow</a>
                   </li>
               </ul>
           </li>
@@ -385,10 +385,13 @@
               </ul>
           </li>
           <li>
-            <a href="#visually-similar-recommendation-api" class="toc-h1 toc-link" data-title="Visually Similar Recommendation API">Visually Similar Recommendation API</a>
+            <a href="#visual-search-api" class="toc-h1 toc-link" data-title="Visual Search API">Visual Search API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#search-api" class="toc-h2 toc-link" data-title="Search API">Search API</a>
+                  </li>
+                  <li>
+                    <a href="#get-vs-credit-and-status" class="toc-h2 toc-link" data-title="Get VS Credit and Status">Get VS Credit and Status</a>
                   </li>
               </ul>
           </li>
@@ -442,7 +445,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>Visually Similar Recommendation</td>
+<td>Visual Search</td>
 <td>1</td>
 </tr>
 <tr>
@@ -464,7 +467,17 @@
 <aside class="notice">
 For Authorization, in any API example, you must replace the dummy <code>X-API-KEY</code> API key in the header with your personal API key, which is assigned by WarpDriven.
 </aside>
-<h2 id='nuwa-workflow'>Nuwa Workflow</h2><h2 id='visually-similar-recommendation-workflow'>Visually Similar Recommendation Workflow</h2><h1 id='customer-managerment-service-api'>Customer Managerment Service API</h1><h2 id='get-user'>Get User</h2>
+<h2 id='nuwa-workflow'>Nuwa Workflow</h2>
+<p>Nuwa is WarpDriven&#39;s data storage service. All your products should go through the Nuwa, and Nuwa will save your data into our database. It will also assign the data calculating related jobs to other services. For example, it will launch <strong>Visual Search</strong> jobs if you also require the visual search plan.</p>
+
+<aside class="success">
+Nuwa is able to capture the data change for data update and insert every time and charge the credit appropriately.
+</aside>
+<h2 id='visual-search-workflow'>Visual Search Workflow</h2>
+<p>Visual Search service will be triggered once new product images are coming. This service will automatically calculate the image vector and related features for each new product image. </p>
+
+<p>Those data will be used to support our AI model and visual search engine.</p>
+<h1 id='customer-managerment-service-api'>Customer Managerment Service API</h1><h2 id='get-user'>Get User</h2>
 <blockquote>
 <p>Example of how to :</p>
 </blockquote>
@@ -1857,37 +1870,186 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
 <aside class="success">
 We allow you provide those shop variant ids which doesn't exist in the service actually, and we will just ignore them.
 </aside>
-<h1 id='visually-similar-recommendation-api'>Visually Similar Recommendation API</h1><h2 id='search-api'>Search API</h2>
+<h1 id='visual-search-api'>Visual Search API</h1>
+<p>Once you have subscribed to the Visual Search plan, and you have enough credits, you should be able to use our VS API to get similar products to get recommendations.</p>
+
+<p>To get the visual search results, You should always init your products via <a href="#insert-products">Nuwa Upsert API</a> first, and make sure the task id status and process are successful by <a href="#get-vs-credit-and-status">VS credit and status API</a>.</p>
+<h2 id='search-api'>Search API</h2>
 <blockquote>
-<p>Example of how to :</p>
+<p>Example of how to make a visual search API:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code></code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code></code></pre></div>
-<p>Describe this API from here...</p>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'http://example.com/vs/internal_search?shop_variant_id=001'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-Key: meowmeowmeow'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"http://example.com/vs/internal_search?shop_variant_id=001"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'X-API-Key'</span><span class="p">:</span> <span class="s">'meowmeowmeow'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">maxBodyLength</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://example.com/vs/internal_search?shop_variant_id=001</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="dl">'</span><span class="s1">X-API-Key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>In this API, you will need to provide the target product&#39;s shop_variant_id, and the API will return all visual similar products for you. The return results are sorted by similar score rank of DESC.</p>
 
 <p><code>X-API-KEY: meowmeowmeow</code></p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST /product/delete/</code></p>
-<h3 id='request-body'>Request Body</h3>
+<p><code>POST /internal_search?shop_variant_id={id}</code></p>
+<h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>Data</th>
+<th>Parameter</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>delete_shop_variant_ids</td>
-<td>The list of <a href="#product-property">shop_variant_id</a></td>
+<td><a href="#product-property">shop_variant_id</a></td>
+<td>The unique id for each product.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+If you just init your products by Nuwa API, you probably will not get the visual search results immediately, because training AI model and calculating vectors for images are time-consuming jobs. You should check the status and progress via the task id and make sure it has been succesful.
+</aside>
+<h3 id='response'>Response</h3>
+<p>The max num of similar visual search results are 20 products. You will find the, score and recall strategy for each candidate product.</p>
+
+<blockquote>
+<p>Successful response example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"shop_variant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"001"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"score"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"recall_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"shop_variant_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"002"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"score"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5857766</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"recall_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h2 id='get-vs-credit-and-status'>Get VS Credit and Status</h2>
+<blockquote>
+<p>Example of how to make a visual search API:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="s1">'https://example.com/latest/vs/get_vs_credit_status?plan_id=1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'X-API-Key: meowmeowmeow'</span>
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://example.com/latest/vs/get_vs_credit_status?plan_id=1"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'X-API-Key'</span><span class="p">:</span> <span class="s">'meowmeowmeow'</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">get</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">maxBodyLength</span><span class="p">:</span> <span class="kc">Infinity</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="dl">'</span><span class="s1">https://example.com/latest/vs/get_vs_credit_status?plan_id=1</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="dl">'</span><span class="s1">X-API-Key</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre></div>
+<p>Describe this API from here...</p>
+
+<p><code>X-API-KEY: meowmeowmeow</code></p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET /get_vs_credit_status?plan_id=1</code></p>
+<h3 id='request-parameters-2'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="#plan-id">plan_id</a></td>
+<td>The ID of VS service.</td>
 </tr>
 </tbody></table>
 
 <aside class="notice">
 For authorization in the API header, you must replace the dummy <code>X-API-KEY</code> API key <code>meowmeowmeow</code> with your personal API key, which is assigned by Warp Driven.
 </aside>
-<h3 id='response'>Response</h3>
+<h3 id='response-2'>Response</h3>
+<p>If you don&#39;t have any running task, the response will only bring back the credit info. Otherwise, you should also get the <strong>task_progress</strong> and <strong>task_status</strong>.</p>
+
 <blockquote>
 <p>Successful response example:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code></code></pre></div><h1 id='errors'>Errors</h1>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"plan_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"product_credit"</span><span class="p">:</span><span class="w"> </span><span class="mi">3594</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"product_plan_credit"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quota_renewal_date_left"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quota_renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-05-20T06:48:23Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"plan_start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-20T06:48:23Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"plan_end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2027-04-20T06:48:23Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"is_expired"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"task_progress"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"task_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">or</span><span class="w"> 
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"plan_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"product_credit"</span><span class="p">:</span><span class="w"> </span><span class="mi">3594</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"product_plan_credit"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"plan_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quota_renewal_date_left"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quota_renewal_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-05-20T06:48:23Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"plan_start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-20T06:48:23Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"plan_end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2027-04-20T06:48:23Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"is_expired"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
