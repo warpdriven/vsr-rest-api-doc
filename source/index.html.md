@@ -5,7 +5,6 @@ language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of
   - shell
   - python
   - javascript
-  - php
 
 toc_footers:
   - <a href='https://warp-driven.com/'>Documentation Powered by Warp Driven</a>
@@ -17,7 +16,6 @@ includes:
   - nuwa
   - vsr
   - errors
-  - example
 
 search: true
 

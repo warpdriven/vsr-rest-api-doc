@@ -52,6 +52,8 @@ erp_user_email | user account email
 
 ### Response
 
+Please check the example from the right side.
+
 > Successful response example:
 
 ```json
@@ -227,7 +229,7 @@ tags |
 
 ### Response
 
-Please check the response example at right side.
+Please check the example from the right side.
 
 > Successful response example:
 
@@ -303,7 +305,7 @@ url |
 
 ### Response
 
-Please check the response example at right side.
+Please check the example from the right side.
 
 > Successful response example:
 
@@ -373,7 +375,7 @@ platform_type |
 
 ### Response
 
-Please check the example at right side.
+Please check the example from the right side.
 
 > Successful response example:
 
@@ -426,6 +428,8 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
 </aside>
 
 ### Response
+
+Please check the example from the right side.
 
 > Successful response example:
 
@@ -490,6 +494,8 @@ For authorization in the API header, you must replace the dummy <code>X-API-KEY<
 </aside>
 
 ### Response
+
+Please check the example from the right side.
 
 > Successful response example:
 
